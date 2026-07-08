@@ -1,7 +1,7 @@
-/*package br.edu.divulgaambulantes.config;
+package br.edu.divulgaambulantes.config;
 
 import jakarta.persistence.EntityManagerFactory;
-//import org.eclipse.persistence.jpa.PersistenceProvider;
+import org.eclipse.persistence.jpa.PersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -22,7 +22,7 @@ public class JpaConfig {
 
         factory.setDataSource(dataSource);
         factory.setPackagesToScan("br.edu.divulgaambulantes.entity");
-        //factory.setPersistenceProviderClass(PersistenceProvider.class);
+        factory.setPersistenceProviderClass(PersistenceProvider.class);
 
         Map<String, Object> props = new HashMap<>();
 
@@ -40,4 +40,4 @@ public class JpaConfig {
     public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
-}*/
+}
