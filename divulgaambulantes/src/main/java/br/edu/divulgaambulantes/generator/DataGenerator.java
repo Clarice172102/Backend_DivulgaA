@@ -33,72 +33,72 @@ public static void main(String[] args) {
         conn.setAutoCommit(false);
 
         // --------------------------------------------------
-        // 1. USUÁRIOS (1000)
+        // 1. USUÁRIOS (41000)
         // --------------------------------------------------
-        System.out.print("Inserindo 50000 usuários... ");
-        gerarUsuarios(conn, 50000);
+        System.out.print("Inserindo 41000 usuários... ");
+        gerarUsuarios(conn, 41000);
         System.out.println("OK!");
 
         List<String> userIds = carregarIds(conn, "SELECT id FROM users");
 
         // --------------------------------------------------
-        // 2. PRODUTOS (1000)
+        // 2. PRODUTOS (100000)
         // --------------------------------------------------
-        System.out.print("Inserindo 50000 produtos... ");
-        gerarProdutos(conn, 50000, userIds);
+        System.out.print("Inserindo 100000 produtos... ");
+        gerarProdutos(conn, 100000, userIds);
         System.out.println("OK!");
 
         List<String> productIds = carregarIds(conn, "SELECT id FROM products");
 
         // --------------------------------------------------
-        // 3. LIKES (1000)
+        // 3. LIKES (10000)
         // --------------------------------------------------
-        System.out.print("Inserindo 50000 likes... ");
-        gerarLikes(conn, 50000, userIds, productIds);
+        System.out.print("Inserindo 100000 likes... ");
+        gerarLikes(conn, 100000, userIds, productIds);
         System.out.println("OK!");
 
         // --------------------------------------------------
-        // 4. FAVORITES (1000)
+        // 4. FAVORITES (80000)
         // --------------------------------------------------
-        System.out.print("Inserindo 50000 favoritos... ");
-        gerarFavorites(conn, 50000, userIds);
+        System.out.print("Inserindo 80000 favoritos... ");
+        gerarFavorites(conn, 80000, userIds);
         System.out.println("OK!");
 
         // --------------------------------------------------
-        // 5. REVIEWS (1000)
+        // 5. REVIEWS (70000)
         // --------------------------------------------------
-        System.out.print("Inserindo 50000 reviews... ");
-        gerarReviews(conn, 50000, userIds, productIds);
+        System.out.print("Inserindo 70000 reviews... ");
+        gerarReviews(conn, 70000, userIds, productIds);
         System.out.println("OK!");
 
         List<String> reviewIds = carregarIds(conn, "SELECT id FROM reviews");
 
         // --------------------------------------------------
-        // 6. REVIEW_VIEWS (1000)
+        // 6. REVIEW_VIEWS (50000)
         // --------------------------------------------------
         System.out.print("Inserindo 50000 visualizações de reviews... ");
         gerarReviewViews(conn, 50000, reviewIds, userIds);
         System.out.println("OK!");
 
         // --------------------------------------------------
-        // 7. PRODUCT_CLICKS (1000)
+        // 7. PRODUCT_CLICKS (70000)
         // --------------------------------------------------
-        System.out.print("Inserindo 50000 cliques em produtos... ");
-        gerarProductClicks(conn, 50000, userIds, productIds);
+        System.out.print("Inserindo 70000 cliques em produtos... ");
+        gerarProductClicks(conn, 70000, userIds, productIds);
         System.out.println("OK!");
 
         // --------------------------------------------------
-        // 8. PAGE_SESSIONS (1000)
+        // 8. PAGE_SESSIONS (50000)
         // --------------------------------------------------
         System.out.print("Inserindo 50000 sessões de página... ");
         gerarPageSessions(conn, 50000, userIds);
         System.out.println("OK!");
 
         // --------------------------------------------------
-        // 9. REPORTS (1000)
+        // 9. REPORTS (67000)
         // --------------------------------------------------
-        System.out.print("Inserindo 50000 denúncias... ");
-        gerarReports(conn, 50000, userIds, productIds);
+        System.out.print("Inserindo 67000 denúncias... ");
+        gerarReports(conn, 67000, userIds, productIds);
         System.out.println("OK!");
 
         // --------------------------------------------------
@@ -109,24 +109,24 @@ public static void main(String[] args) {
         System.out.println("OK!");
 
         // --------------------------------------------------
-        // 11. DEVICE_TOKENS (1000)
+        // 11. DEVICE_TOKENS (100000)
         // --------------------------------------------------
-        System.out.print("Inserindo 50000 tokens de dispositivos... ");
-        gerarDeviceTokens(conn, 50000, userIds);
+        System.out.print("Inserindo 100000 tokens de dispositivos... ");
+        gerarDeviceTokens(conn, 100000, userIds);
         System.out.println("OK!");
 
         // --------------------------------------------------
-        // 12. AUDIT_LOGS (1000)
+        // 12. AUDIT_LOGS (50000)
         // --------------------------------------------------
         System.out.print("Inserindo 50000 logs de auditoria... ");
         gerarAuditLogs(conn, 50000, userIds);
         System.out.println("OK!");
 
         // --------------------------------------------------
-        // 13. CONSENT_LOGS (1000)
+        // 13. CONSENT_LOGS (65000)
         // --------------------------------------------------
-        System.out.print("Inserindo 50000 registros de consentimento... ");
-        gerarConsentLogs(conn, 50000, userIds);
+        System.out.print("Inserindo 65000 registros de consentimento... ");
+        gerarConsentLogs(conn, 65000, userIds);
         System.out.println("OK!");
 
         // --------------------------------------------------
