@@ -18,11 +18,16 @@ public class User {
     @GeneratedValue
     private UUID id;
 
+    @Column(name = "full_name")
     private String fullName;
+
     private String username;
     private String email;
     private String phone;
+
+    @Column(name = "avatar_url")
     private String avatarUrl;
+
     private String bio;
 
     @Column(name = "account_type")
