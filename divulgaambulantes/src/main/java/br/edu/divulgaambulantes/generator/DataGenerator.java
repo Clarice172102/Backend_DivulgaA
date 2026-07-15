@@ -1,5 +1,6 @@
 package br.edu.divulgaambulantes.generator;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
+
 /**
  * DataGenerator — JDBC Puro
  * Popula TODAS as tabelas do schema divulgaambulantes com 300 registros cada,
@@ -20,134 +22,172 @@ import java.util.UUID;
  */
 public class DataGenerator {
 
+
     private static final String URL = "jdbc:mysql://localhost:3306/divulgaambulantes";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
     private static final Random rand = new Random();
 
+
 public static void main(String[] args) {
     System.out.println("=== INICIANDO GERAÇÃO COMPLETA DE DADOS (JDBC) ===");
     long inicio = System.currentTimeMillis();
 
+
     try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
         conn.setAutoCommit(false);
+
 
         // --------------------------------------------------
         // 1. USUÁRIOS (41000)
         // --------------------------------------------------
         System.out.print("Inserindo 41000 usuários... ");
         gerarUsuarios(conn, 41000);
+        conn.commit();
         System.out.println("OK!");
 
+
         List<String> userIds = carregarIds(conn, "SELECT id FROM users");
+
 
         // --------------------------------------------------
         // 2. PRODUTOS (100000)
         // --------------------------------------------------
         System.out.print("Inserindo 100000 produtos... ");
         gerarProdutos(conn, 100000, userIds);
+        conn.commit();
         System.out.println("OK!");
 
+
         List<String> productIds = carregarIds(conn, "SELECT id FROM products");
+
 
         // --------------------------------------------------
         // 3. LIKES (10000)
         // --------------------------------------------------
         System.out.print("Inserindo 100000 likes... ");
         gerarLikes(conn, 100000, userIds, productIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 4. FAVORITES (80000)
         // --------------------------------------------------
         System.out.print("Inserindo 80000 favoritos... ");
         gerarFavorites(conn, 80000, userIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 5. REVIEWS (70000)
         // --------------------------------------------------
         System.out.print("Inserindo 70000 reviews... ");
         gerarReviews(conn, 70000, userIds, productIds);
+        conn.commit();
         System.out.println("OK!");
 
+
         List<String> reviewIds = carregarIds(conn, "SELECT id FROM reviews");
+
 
         // --------------------------------------------------
         // 6. REVIEW_VIEWS (50000)
         // --------------------------------------------------
         System.out.print("Inserindo 50000 visualizações de reviews... ");
         gerarReviewViews(conn, 50000, reviewIds, userIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 7. PRODUCT_CLICKS (70000)
         // --------------------------------------------------
         System.out.print("Inserindo 70000 cliques em produtos... ");
         gerarProductClicks(conn, 70000, userIds, productIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 8. PAGE_SESSIONS (50000)
         // --------------------------------------------------
         System.out.print("Inserindo 50000 sessões de página... ");
         gerarPageSessions(conn, 50000, userIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 9. REPORTS (67000)
         // --------------------------------------------------
         System.out.print("Inserindo 67000 denúncias... ");
         gerarReports(conn, 67000, userIds, productIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 10. NOTIFICATIONS (1000)
         // --------------------------------------------------
         System.out.print("Inserindo 50000 notificações... ");
         gerarNotifications(conn, 50000, userIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 11. DEVICE_TOKENS (100000)
         // --------------------------------------------------
         System.out.print("Inserindo 100000 tokens de dispositivos... ");
         gerarDeviceTokens(conn, 100000, userIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 12. AUDIT_LOGS (50000)
         // --------------------------------------------------
         System.out.print("Inserindo 50000 logs de auditoria... ");
         gerarAuditLogs(conn, 50000, userIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 13. CONSENT_LOGS (65000)
         // --------------------------------------------------
         System.out.print("Inserindo 65000 registros de consentimento... ");
         gerarConsentLogs(conn, 65000, userIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         // --------------------------------------------------
         // 14. COMMUNITY_EVENTS (1000)
         // --------------------------------------------------
         System.out.print("Inserindo 50000 eventos comunitários... ");
         gerarCommunityEvents(conn, 50000, userIds);
+        conn.commit();
         System.out.println("OK!");
+
 
         conn.commit();
     } catch (Exception e) {
         e.printStackTrace();
     }
 
+
     long fim = System.currentTimeMillis();
     System.out.printf("Tempo total (JDBC): %.3f segundos%n", (fim - inicio) / 1000.0);
 }
 
+
     // ============================================================
     // MÉTODOS AUXILIARES
     // ============================================================
+
 
     private static List<String> carregarIds(Connection conn, String sql) throws Exception {
         List<String> ids = new ArrayList<>();
@@ -157,9 +197,11 @@ public static void main(String[] args) {
         return ids;
     }
 
+
     private static LocalDateTime dataAleatoria() {
         return LocalDateTime.now().minusDays(rand.nextInt(30)).minusHours(rand.nextInt(24));
     }
+
 
     // --------------------------------------------------
     // Usuários
@@ -184,6 +226,7 @@ public static void main(String[] args) {
         }
     }
 
+
     // --------------------------------------------------
     // Produtos
     // --------------------------------------------------
@@ -205,6 +248,7 @@ public static void main(String[] args) {
             ps.executeBatch();
         }
     }
+
 
     // --------------------------------------------------
     // Likes
@@ -230,6 +274,7 @@ public static void main(String[] args) {
             ps.executeBatch();
         }
     }
+
 
     // --------------------------------------------------
     // Favoritos
@@ -257,6 +302,7 @@ public static void main(String[] args) {
         }
     }
 
+
     // --------------------------------------------------
     // Reviews
     // --------------------------------------------------
@@ -279,6 +325,7 @@ public static void main(String[] args) {
         }
     }
 
+
     // --------------------------------------------------
     // Review Views
     // --------------------------------------------------
@@ -296,6 +343,7 @@ public static void main(String[] args) {
         }
     }
 
+
     // --------------------------------------------------
     // Product Clicks
     // --------------------------------------------------
@@ -312,6 +360,7 @@ public static void main(String[] args) {
             ps.executeBatch();
         }
     }
+
 
     // --------------------------------------------------
     // Page Sessions
@@ -334,6 +383,7 @@ public static void main(String[] args) {
         }
     }
 
+
     // --------------------------------------------------
     // Reports
     // --------------------------------------------------
@@ -353,6 +403,7 @@ public static void main(String[] args) {
             ps.executeBatch();
         }
     }
+
 
     // --------------------------------------------------
     // Notifications
@@ -375,6 +426,7 @@ public static void main(String[] args) {
         }
     }
 
+
     // --------------------------------------------------
     // Device Tokens
     // --------------------------------------------------
@@ -385,7 +437,7 @@ public static void main(String[] args) {
             for (int i = 0; i < qtd; i++) {
                 ps.setString(1, UUID.randomUUID().toString());
                 ps.setString(2, userIds.get(rand.nextInt(userIds.size())));
-                ps.setString(3, "fcm_token_" + UUID.randomUUID().toString().substring(0, 8));
+                ps.setString(3, "fcm_token_" + UUID.randomUUID().toString());
                 ps.setString(4, plataformas[rand.nextInt(plataformas.length)]);
                 ps.setString(5, "Dispositivo " + i);
                 ps.setBoolean(6, rand.nextBoolean());
@@ -394,6 +446,7 @@ public static void main(String[] args) {
             ps.executeBatch();
         }
     }
+
 
     // --------------------------------------------------
     // Audit Logs
@@ -414,6 +467,7 @@ public static void main(String[] args) {
         }
     }
 
+
     // --------------------------------------------------
     // Consent Logs
     // --------------------------------------------------
@@ -432,6 +486,7 @@ public static void main(String[] args) {
             ps.executeBatch();
         }
     }
+
 
     // --------------------------------------------------
     // Community Events
