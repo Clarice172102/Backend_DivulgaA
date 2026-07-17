@@ -54,7 +54,7 @@ public static void main(String[] args) {
         // 2. PRODUTOS (100000)
         // --------------------------------------------------
         System.out.print("Inserindo 100000 produtos... ");
-        gerarProdutos(conn, 100000, userIds);
+        gerarProdutos(conn, 200000, userIds);
         conn.commit();
         System.out.println("OK!");
 
@@ -66,7 +66,7 @@ public static void main(String[] args) {
         // 3. LIKES (10000)
         // --------------------------------------------------
         System.out.print("Inserindo 100000 likes... ");
-        gerarLikes(conn, 100000, userIds, productIds);
+        gerarLikes(conn, 700000, userIds, productIds);
         conn.commit();
         System.out.println("OK!");
 
@@ -75,7 +75,7 @@ public static void main(String[] args) {
         // 4. FAVORITES (80000)
         // --------------------------------------------------
         System.out.print("Inserindo 80000 favoritos... ");
-        gerarFavorites(conn, 80000, userIds);
+        gerarFavorites(conn, 500000, userIds);
         conn.commit();
         System.out.println("OK!");
 
@@ -84,7 +84,7 @@ public static void main(String[] args) {
         // 5. REVIEWS (70000)
         // --------------------------------------------------
         System.out.print("Inserindo 70000 reviews... ");
-        gerarReviews(conn, 70000, userIds, productIds);
+        gerarReviews(conn, 200000, userIds, productIds);
         conn.commit();
         System.out.println("OK!");
 
@@ -96,7 +96,7 @@ public static void main(String[] args) {
         // 6. REVIEW_VIEWS (50000)
         // --------------------------------------------------
         System.out.print("Inserindo 50000 visualizações de reviews... ");
-        gerarReviewViews(conn, 50000, reviewIds, userIds);
+        gerarReviewViews(conn, 700000, reviewIds, userIds);
         conn.commit();
         System.out.println("OK!");
 
@@ -105,7 +105,7 @@ public static void main(String[] args) {
         // 7. PRODUCT_CLICKS (70000)
         // --------------------------------------------------
         System.out.print("Inserindo 70000 cliques em produtos... ");
-        gerarProductClicks(conn, 70000, userIds, productIds);
+        gerarProductClicks(conn, 1200000, userIds, productIds);
         conn.commit();
         System.out.println("OK!");
 
