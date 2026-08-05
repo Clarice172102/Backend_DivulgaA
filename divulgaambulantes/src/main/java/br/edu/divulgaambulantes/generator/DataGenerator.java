@@ -33,6 +33,14 @@ public static void main(String[] args) {
         conn.setAutoCommit(false);
 
         // --------------------------------------------------
+        // 0. LIMPEZA (evita erro de duplicidade em novas execuções)
+        // --------------------------------------------------
+        System.out.print("Limpando tabelas... ");
+        limparTabelas(conn);
+        conn.commit();
+        System.out.println("OK!");
+
+        // --------------------------------------------------
         // 1. USUÁRIOS (41000)
         // --------------------------------------------------
         System.out.print("Inserindo 41000 usuários... ");
@@ -155,6 +163,22 @@ public static void main(String[] args) {
             while (rs.next()) ids.add(rs.getString("id"));
         }
         return ids;
+    }
+
+    private static void limparTabelas(Connection conn) throws Exception {
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute("SET FOREIGN_KEY_CHECKS = 0");
+            String[] tabelas = {
+                "likes", "favorites", "reviews", "review_views",
+                "product_clicks", "page_sessions", "reports",
+                "notifications", "device_tokens", "audit_logs",
+                "consent_logs", "community_events", "products", "users"
+            };
+            for (String tabela : tabelas) {
+                stmt.execute("TRUNCATE TABLE " + tabela);
+            }
+            stmt.execute("SET FOREIGN_KEY_CHECKS = 1");
+        }
     }
 
     private static LocalDateTime dataAleatoria() {
