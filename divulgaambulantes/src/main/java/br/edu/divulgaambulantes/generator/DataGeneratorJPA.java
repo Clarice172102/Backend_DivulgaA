@@ -1,6 +1,5 @@
 package br.edu.divulgaambulantes.generator;
 
-
 import br.edu.divulgaambulantes.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -13,14 +12,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-
 /**
  * DataGeneratorJPA — EclipseLink
  * Popula TODAS as tabelas do schema divulgaambulantes com dados de exemplo,
  * usando JPA para persistência.
  */
 public class DataGeneratorJPA {
-
 
     private static final Random rand = new Random();
     private static final String[] categorias = {"comida", "roupa", "servico", "artesanato", "eletronico", "outro"};
@@ -31,25 +28,20 @@ public class DataGeneratorJPA {
     private static final String[] plataformas = {"android", "ios", "web"};
     private static final String[] titulosEventos = {"São João", "Carnaval", "Feira de Artesanato", "Festival Gastronômico", "Natal"};
 
-
     /** Gera um LocalDateTime aleatório nos últimos 30 dias */
     private static LocalDateTime dataAleatoria() {
         return LocalDateTime.now().minusDays(rand.nextInt(30)).minusHours(rand.nextInt(24));
     }
 
-
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
 
-
         System.out.println("=== INICIANDO GERAÇÃO COMPLETA DE DADOS (JPA) ===");
         long inicio = System.currentTimeMillis();
 
-
         try {
             em.getTransaction().begin();
-
 
             // ============================================================
             // 1. USUÁRIOS (50)
@@ -72,7 +64,6 @@ public class DataGeneratorJPA {
             em.flush(); em.clear();
             System.out.println("OK!");
 
-
             // ============================================================
             // 2. PRODUTOS (200)
             // ============================================================
@@ -94,7 +85,6 @@ public class DataGeneratorJPA {
             em.flush(); em.clear();
             System.out.println("OK!");
 
-
             // ============================================================
             // 3. LIKES (100)
             // ============================================================
@@ -109,7 +99,6 @@ public class DataGeneratorJPA {
             }
             em.flush(); em.clear();
             System.out.println("OK!");
-
 
             // ============================================================
             // 4. FAVORITES (80)
@@ -130,7 +119,6 @@ public class DataGeneratorJPA {
             }
             em.flush(); em.clear();
             System.out.println("OK!");
-
 
             // ============================================================
             // 5. REVIEWS (60)
@@ -153,7 +141,6 @@ public class DataGeneratorJPA {
             em.flush(); em.clear();
             System.out.println("OK!");
 
-
             // ============================================================
             // 6. REVIEW_VIEWS (40)
             // ============================================================
@@ -169,7 +156,6 @@ public class DataGeneratorJPA {
             em.flush(); em.clear();
             System.out.println("OK!");
 
-
             // ============================================================
             // 7. PRODUCT_CLICKS (150)
             // ============================================================
@@ -184,7 +170,6 @@ public class DataGeneratorJPA {
             }
             em.flush(); em.clear();
             System.out.println("OK!");
-
 
             // ============================================================
             // 8. PAGE_SESSIONS (30)
@@ -204,7 +189,6 @@ public class DataGeneratorJPA {
             em.flush(); em.clear();
             System.out.println("OK!");
 
-
             // ============================================================
             // 9. REPORTS (10)
             // ============================================================
@@ -221,7 +205,6 @@ public class DataGeneratorJPA {
             }
             em.flush(); em.clear();
             System.out.println("OK!");
-
 
             // ============================================================
             // 10. NOTIFICATIONS (50)
@@ -241,7 +224,6 @@ public class DataGeneratorJPA {
             em.flush(); em.clear();
             System.out.println("OK!");
 
-
             // ============================================================
             // 11. DEVICE_TOKENS (30)
             // ============================================================
@@ -258,7 +240,6 @@ public class DataGeneratorJPA {
             }
             em.flush(); em.clear();
             System.out.println("OK!");
-
 
             // ============================================================
             // 12. AUDIT_LOGS (20)
@@ -277,7 +258,6 @@ public class DataGeneratorJPA {
             em.flush(); em.clear();
             System.out.println("OK!");
 
-
             // ============================================================
             // 13. CONSENT_LOGS (15)
             // ============================================================
@@ -294,7 +274,6 @@ public class DataGeneratorJPA {
             }
             em.flush(); em.clear();
             System.out.println("OK!");
-
 
             // ============================================================
             // 14. COMMUNITY_EVENTS (5)
@@ -318,7 +297,6 @@ public class DataGeneratorJPA {
             em.flush(); em.clear();
             System.out.println("OK!");
 
-
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -327,7 +305,6 @@ public class DataGeneratorJPA {
             em.close();
             emf.close();
         }
-
 
         long fim = System.currentTimeMillis();
         System.out.printf("Tempo total (JPA): %.3f segundos%n", (fim - inicio) / 1000.0);
