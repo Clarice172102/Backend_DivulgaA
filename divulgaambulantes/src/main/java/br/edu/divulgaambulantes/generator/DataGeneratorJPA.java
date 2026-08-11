@@ -43,7 +43,8 @@ public class DataGeneratorJPA {
 
     private static final String PERSISTENCE_UNIT = "default";
 
-    private static final int SCALE = 7;
+    //private static final int SCALE = 7;
+    private static final int SCALE = 1;
     private static final int BATCH_SIZE = 1_000;
     private static final int PROGRESS_INTERVAL = 50_000;
 
